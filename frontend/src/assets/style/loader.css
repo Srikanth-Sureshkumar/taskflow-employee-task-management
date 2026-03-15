@@ -1,0 +1,191 @@
+/* ══════════════════════════════════════════
+   LOADER
+══════════════════════════════════════════ */
+
+/* ── Wrapper ── */
+.loader-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+}
+
+.loader-fullscreen {
+  position: fixed;
+  inset: 0;
+  background: var(--ink);
+  z-index: 9999;
+  padding: 0;
+  animation: fadeIn .15s ease;
+}
+
+/* ── Center box ── */
+.loader-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  position: relative;
+}
+
+/* ── Spinning ring ── */
+.loader-ring {
+  width: 72px;
+  height: 72px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.loader-ring::before,
+.loader-ring::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+/* Outer track */
+.loader-ring::before {
+  border: 3px solid var(--surface-3);
+}
+
+/* Spinning arc */
+.loader-ring::after {
+  border: 3px solid transparent;
+  border-top-color: var(--accent);
+  border-right-color: var(--accent-2);
+  animation: loader-spin .75s cubic-bezier(.5, 0, .5, 1) infinite;
+}
+
+/* Inner pulsing ring */
+.loader-ring-inner {
+  position: absolute;
+  inset: 10px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-bottom-color: rgba(108, 99, 255, .35);
+  animation: loader-spin-reverse 1.2s linear infinite;
+}
+
+/* ── Brand icon in center ── */
+.loader-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 22px;
+  line-height: 1;
+  animation: loader-pulse 1.4s ease-in-out infinite;
+  margin-top: -9px; /* shift for gap offset */
+}
+
+/* ── Text ── */
+.loader-text {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin: 0;
+  animation: loader-blink 1.4s ease-in-out infinite;
+}
+
+/* ── Dot trail variant (inline/small) ── */
+.loader-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.loader-dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: loader-dot-bounce .9s ease-in-out infinite;
+}
+.loader-dots span:nth-child(2) { animation-delay: .15s; background: var(--accent-2); }
+.loader-dots span:nth-child(3) { animation-delay: .30s; background: rgba(108,99,255,.5); }
+
+/* ── Skeleton shimmer ── */
+.skeleton {
+  background: var(--surface-2);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  position: relative;
+}
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,.04) 40%,
+    rgba(255,255,255,.08) 50%,
+    rgba(255,255,255,.04) 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.6s ease infinite;
+}
+
+/* ── Page-level skeleton ── */
+.skeleton-page {
+  padding: 0;
+  animation: fadeUp .3s ease;
+}
+
+.skeleton-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  gap: 16px;
+}
+
+.skeleton-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* ── Animations ── */
+@keyframes loader-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes loader-spin-reverse {
+  to { transform: rotate(-360deg); }
+}
+@keyframes loader-pulse {
+  0%, 100% { opacity: 1;   transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: .65; transform: translate(-50%, -50%) scale(.85); }
+}
+@keyframes loader-blink {
+  0%, 100% { opacity: .5; }
+  50%       { opacity: 1;  }
+}
+@keyframes loader-dot-bounce {
+  0%, 80%, 100% { transform: scale(1);   opacity: .6; }
+  40%            { transform: scale(1.4); opacity: 1;  }
+}
+@keyframes skeleton-shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 1200px) { .skeleton-stats { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 900px)  { .skeleton-grid  { grid-template-columns: 1fr; } }
+@media (max-width: 640px)  {
+  .loader-ring  { width: 56px; height: 56px; }
+  .loader-icon  { font-size: 17px; }
+  .skeleton-stats { grid-template-columns: repeat(2,1fr); }
+}

@@ -1,0 +1,36 @@
+{
+  "tasks": [
+    {
+      "id": "E001",
+      "emp_name": "John Doe",
+      "title": "Website UI Update",
+      "description": "Redesign and improve the user interface of the company website, ensuring responsive layout, modern styling, and better user experience across all devices.",
+      "designation": "Frontend Developer",
+      "status": "In Process",
+      "startDate": "2026-01-18",
+      "dueDate": "2026-02-20"      
+    },
+
+    {
+      "id": "E002",
+      "emp_name": "Jane Smith",
+      "title": "Connect backend API",
+      "description": "Develop and integrate backend APIs with the frontend application, ensuring secure data exchange, proper authentication, and optimized performance.",
+      "designation": "Backend Developer",
+      "status": "Completed",
+      "startDate": "2026-01-08",
+      "dueDate": "2026-02-22"     
+    },
+
+    {
+      "id": "E003",
+      "emp_name": "Michael Brown",
+      "title": "API Integration",
+      "description": "Integrate third-party APIs into the system, handle data mapping, error handling, and ensure seamless communication between services.",
+      "designation": "Backend Developer",
+      "status": "Pending",
+      "startDate": "2026-01-05",
+      "dueDate": "2026-02-28"   
+    }
+  ]
+}
