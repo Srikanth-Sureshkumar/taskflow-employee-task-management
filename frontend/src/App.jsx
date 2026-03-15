@@ -4,6 +4,7 @@ import "./index.css";
 
 import Header    from "./layouts/header.jsx";
 import SideBar   from "./layouts/sideBar";
+import Footer    from "./components/Footer.jsx";
 import Dashboard from "./components/Dashboard.jsx";
 import Task      from "./pages/task/index.jsx";
 import Create    from "./pages/task/taskCreate.jsx";
@@ -14,7 +15,7 @@ import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import Loader    from "./components/Loader.jsx";
 
 function AppShell() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileOpen,       setMobileOpen]       = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
@@ -24,19 +25,26 @@ function AppShell() {
         onMobileClose={() => setMobileOpen(false)}
         onCollapsedChange={setSidebarCollapsed}
       />
+
       <div className={`main-content ${sidebarCollapsed ? "sidebar-collapsed" : ""}`}>
         <Header
           sidebarCollapsed={sidebarCollapsed}
           onHamburger={() => setMobileOpen(true)}
         />
-        <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/tasks" element={<Task />} />
-          <Route path="/create" element={<Create />} />
-          <Route path="/list" element={<List />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="*" element={<Navigate to="/dashboard" />} />
-        </Routes>
+
+        {/* Page content */}
+        <div className="page-content">
+          <Routes>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/tasks"     element={<Task />} />
+            <Route path="/create"    element={<Create />} />
+            <Route path="/list"      element={<List />} />
+            <Route path="/settings"  element={<Settings />} />
+            <Route path="*"          element={<Navigate to="/dashboard" />} />
+          </Routes>
+        </div>
+
+        <Footer />
       </div>
     </div>
   );
@@ -46,15 +54,12 @@ export default function App() {
   const [booting, setBooting] = useState(true);
   const token = localStorage.getItem("token");
 
-  /* Brief boot loader so fonts/CSS settle before paint */
   useEffect(() => {
     const t = setTimeout(() => setBooting(false), 800);
     return () => clearTimeout(t);
   }, []);
 
-  if (booting) {
-    return <Loader fullscreen text="Starting TaskFlow…" />;
-  }
+  if (booting) return <Loader fullscreen text="Starting TaskFlow…" />;
 
   return (
     <Router>
