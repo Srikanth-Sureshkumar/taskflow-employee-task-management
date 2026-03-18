@@ -25,7 +25,7 @@ function TaskItem({ selectedTask, editTask, setEditTask, listData, setListData, 
     try {
       setLoading(true);
       const res = await axios.put(
-        `http://localhost:5000/api/tasks/${tempEdit._id}`,
+        `https://taskflow-employee-task-management.onrender.com/api/tasks/${tempEdit._id}`,
         tempEdit
       );
       setListData(listData.map(t => t._id === tempEdit._id ? res.data : t));

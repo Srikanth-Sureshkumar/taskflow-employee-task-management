@@ -27,7 +27,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post("https://taskflow-employee-task-management.onrender.com/api/auth/login", {
         email: loginEmail,
         password: loginPassword,
         role,
@@ -46,7 +46,7 @@ const Login = () => {
       return;
     }
     try {
-      await axios.post("http://localhost:5000/api/auth/register", {
+      await axios.post("https://taskflow-employee-task-management.onrender.com/api/auth/register", {
         firstName,
         lastName,
         email: regEmail,

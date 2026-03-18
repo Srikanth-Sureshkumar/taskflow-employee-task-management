@@ -5,7 +5,7 @@ import "../assets/style/settings.css";
 const Settings = () => {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   const token = localStorage.getItem("token");
-  const API = "http://localhost:5000/api/user";
+  const API = "https://taskflow-employee-task-management.onrender.com/api/user";
 
   const [firstName, setFirstName] = useState(user?.firstName || "");
   const [lastName, setLastName]   = useState(user?.lastName || "");

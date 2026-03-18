@@ -1,23 +1,3 @@
-// import React from 'react'
-// import StatsCard from '../../components/statsCard';
-// import TaskList from '../../components/taskList';
-
-// function index() {
-//   return (
-//     <>
-//     <div>
-//         <StatsCard/>
-//     </div>
-
-//     <div> 
-//         <TaskList/>
-//     </div>
-//     </>
-//   )
-// }
-
-// export default index
-
 import React from 'react';
 import StatsCard from '../../components/statsCard';
 import TaskList from '../../components/taskList';

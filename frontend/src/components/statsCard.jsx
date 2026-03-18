@@ -7,7 +7,7 @@ const StatsCard = () => {
   const [loading,  setLoading]  = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/tasks")
+    axios.get("https://taskflow-employee-task-management.onrender.com/api/tasks")
       .then(res => setListData(res.data.tasks))
       .catch(err => console.error(err))
       .finally(() => setLoading(false));
